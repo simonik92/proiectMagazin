@@ -6,7 +6,7 @@ public class Product {
 
 
     private String name;
-    private int pret;
+    private String pret;
     private Date dataExpirarii;
     private String producator;
 
@@ -18,11 +18,11 @@ public class Product {
         this.name = name;
     }
 
-    public int getPret() {
+    public String getPret() {
         return pret;
     }
 
-    public void setPret(int pret) {
+    public void setPret(String pret) {
         this.pret = pret;
     }
 

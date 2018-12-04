@@ -1,29 +1,22 @@
-package org.fasttrackit.magazin.domain;
+package org.fasttrackit.magazin.dto;
+
+import org.fasttrackit.magazin.domain.Product;
 
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-@Entity
-@Table(name = "stores")
-public class Magazin {
+public class MagazinDTO {
 
-    @Id
-    @GeneratedValue(generator = "magazin_generator")
-    @SequenceGenerator(
-            name = "magazin_generator",
-            sequenceName = "magazin_sequence",
-            initialValue = 1000
-    )
     private long id;
     private String nume;
     private String adresa;
     private String telefon;
 
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinColumn(name="magazin_Id")
-    private List<Product> products = new ArrayList<>();
+    private List<ProductDTO> firstlements = new ArrayList<>();
+    //
+    // private List<Product> products = new ArrayList<>();
 
 
     public void setId(long id) {
@@ -54,13 +47,12 @@ public class Magazin {
         this.telefon = telefon;
     }
 
-
-    public List<Product> getProducts() {
-        return products;
+    public List<ProductDTO> getFirstlements() {
+        return firstlements;
     }
 
-    public void setProducts(List<Product> products) {
-        this.products = Objects.requireNonNull(products);
+    public void setFirstlements(List<ProductDTO> firstlements) {
+        this.firstlements = firstlements;
     }
 
     public long getId() {
@@ -75,7 +67,7 @@ public class Magazin {
         sb.append(", nume='").append(nume).append('\'');
         sb.append(", adresa='").append(adresa).append('\'');
         sb.append(", telefon='").append(telefon).append('\'');
-        sb.append(", products=").append(products);
+        sb.append(", fisrtElemen=").append(firstlements);
         sb.append('}');
         return sb.toString();
     }

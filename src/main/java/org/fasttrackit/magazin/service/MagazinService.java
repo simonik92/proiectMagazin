@@ -21,16 +21,18 @@ public class MagazinService {
     private MagazinRepository magazinRepository;
 
     @Transactional
-    public void saveMagazin(Magazin magazin) {
+    public void saveMagazin(MagazinDTO magazin) {
         if (magazin.getNume() == null) {
             throw new IllegalArgumentException("Nume can not be null");
         }
         if (magazin.getAdresa() == null) {
             throw new IllegalArgumentException("Adresa can not be null");
         }
+
+       Magazin maga = convert(magazin);
         try {
             //open transaction
-            magazinRepository.save(magazin);
+            magazinRepository.save(maga);
 //            close
         } catch (Exception e) {
             System.out.println("Error when saving magazin " + e);
@@ -75,5 +77,41 @@ public class MagazinService {
         return list;
 
 
+    }
+
+    private MagazinDTO convertToDTO(Magazin magazin) {
+
+        MagazinDTO magazinDTO = new MagazinDTO();
+        magazinDTO.setNume(magazin.getNume());
+        magazinDTO.setId(magazin.getId());
+        return magazinDTO;
+    }
+
+    private Magazin convert(MagazinDTO magazinDTO) {
+
+        Magazin magazin = new Magazin();
+        magazin.setNume(magazinDTO.getNume());
+        magazin.setAdresa(magazinDTO.getAdresa());
+        return magazin;
+    }
+
+    public MagazinDTO getMagazinById(long id) {
+
+        Magazin magazin = magazinRepository.findOne(id);
+        if(magazin == null) {
+            throw new IllegalArgumentException("The id is not valid.");
+        }
+        return convertToDTO(magazin);
+    }
+
+    public MagazinDTO updateMagazin(long id, MagazinDTO dto) {
+
+       Magazin magazin = magazinRepository.findOne(id);
+       magazin.setNume(dto.getNume());
+       magazin.setAdresa(dto.getAdresa());
+
+       Magazin savedObject = magazinRepository.save(magazin);
+
+       return convertToDTO(savedObject);
     }
 }

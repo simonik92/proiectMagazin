@@ -1,15 +1,23 @@
 package org.fasttrackit.magazin.domain;
 
+import javax.persistence.*;
 import java.util.List;
 
-//@Entity
+ @Entity
 public class Cart {
 
-    // @OneToOne
+     @Id
+     @GeneratedValue
+     private long id;
+
+    @OneToOne
     private User user;
 
-    //@OneToMany
+    @OneToMany
+    @JoinColumn(name="cartId")
     private List<OrderedProduct> productsOrdered;
+
+
 
     public User getUser() {
         return user;

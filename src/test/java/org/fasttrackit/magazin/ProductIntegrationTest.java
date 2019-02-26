@@ -21,8 +21,8 @@ public class ProductIntegrationTest {
     public void testSave()
     {
         Product product = new Product();
-        product.setName("Face & body");
-        product.setPret("150 lei");
+        product.setName("Fond de ten");
+        product.setPret("250 lei");
         productService.saveProduct(product);
     }
 }

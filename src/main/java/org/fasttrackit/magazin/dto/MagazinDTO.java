@@ -10,7 +10,7 @@ public class MagazinDTO {
     private String adresa;
     private String telefon;
 
-    private List<ProductDTO> firstelements = new ArrayList<>();
+    private List<ProductDTO> products = new ArrayList<>();
     //
     // private List<Product> products = new ArrayList<>();
 
@@ -43,12 +43,12 @@ public class MagazinDTO {
         this.telefon = telefon;
     }
 
-    public List<ProductDTO> getFirstelements() {
-        return firstelements;
+    public List<ProductDTO> getProducts() {
+        return products;
     }
 
-    public void setFirstelements(List<ProductDTO> firstelements) {
-        this.firstelements = firstelements;
+    public void setProducts(List<ProductDTO> products) {
+        this.products = products;
     }
 
     public long getId() {
@@ -63,7 +63,7 @@ public class MagazinDTO {
         sb.append(", nume='").append(nume).append('\'');
         sb.append(", adresa='").append(adresa).append('\'');
         sb.append(", telefon='").append(telefon).append('\'');
-        sb.append(", firstElement=").append(firstelements);
+        sb.append(", firstElement=").append(products);
         sb.append('}');
         return sb.toString();
     }

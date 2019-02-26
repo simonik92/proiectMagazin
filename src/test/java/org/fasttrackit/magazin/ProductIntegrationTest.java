@@ -23,7 +23,6 @@ public class ProductIntegrationTest {
         Product product = new Product();
         product.setName("Face & body");
         product.setPret("150 lei");
-        product.setProducator("M.A.C");
         productService.saveProduct(product);
     }
 }

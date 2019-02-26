@@ -1,8 +1,8 @@
-package org.fasttrackit.magazin.domain;
+package org.fasttrackit.magazin.dto;
 
+import org.fasttrackit.magazin.domain.Product;
 
-//@Entity
-public class OrderedProduct {
+public class OrderedProductDTO {
 
     private Product product;
     private int quantity;
@@ -23,3 +23,7 @@ public class OrderedProduct {
         this.quantity = quantity;
     }
 }
+
+
+
+

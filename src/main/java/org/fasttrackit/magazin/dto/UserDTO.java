@@ -1,22 +1,13 @@
-package org.fasttrackit.magazin.domain;
+package org.fasttrackit.magazin.dto;
 
-import javax.persistence.*;
+public class UserDTO {
 
-@Entity
-@Table(name="userMagazin")
-public class User {
-
-    @Id
-    @GeneratedValue
     private long id;
-
-    @Column(unique = true)
     private String username;
     private String nume;
     private String prenume;
     private int varsta;
     private String email;
-
 
     public String getUsername() {
         return username;
@@ -59,3 +50,8 @@ public class User {
     }
 
 }
+
+
+
+
+

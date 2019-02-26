@@ -31,4 +31,43 @@ public class UserIntegrationTest {
         userService.saveUser(user);
     }
 
+    @Test
+    public void getUsername() {
+    }
+
+    @Test
+    public void setUsername() {
+    }
+
+    @Test
+    public void getNume() {
+    }
+
+    @Test
+    public void setNume() {
+    }
+
+    @Test
+    public void getPrenume() {
+    }
+
+    @Test
+    public void setPrenume() {
+    }
+
+    @Test
+    public void getVarsta() {
+    }
+
+    @Test
+    public void setVarsta() {
+    }
+
+    @Test
+    public void getEmail() {
+    }
+
+    @Test
+    public void setEmail() {
+    }
 }

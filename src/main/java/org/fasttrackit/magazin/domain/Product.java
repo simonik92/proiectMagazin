@@ -4,7 +4,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
-import java.util.Date;
 
 @Entity
 public class Product {
@@ -20,8 +19,6 @@ public class Product {
 
     private String name;
     private String pret;
-    private Date dataExpirarii;
-    private String producator;
     private int stock;
 
 
@@ -49,22 +46,6 @@ public class Product {
         this.pret = pret;
     }
 
-    public Date getDataExpirarii() {
-        return dataExpirarii;
-    }
-
-    public void setDataExpirarii(Date dataExpirarii) {
-        this.dataExpirarii = dataExpirarii;
-    }
-
-    public String getProducator() {
-        return producator;
-    }
-
-    public void setProducator(String producator) {
-        this.producator = producator;
-    }
-
     public int getStock() {
         return stock;
     }
@@ -79,8 +60,6 @@ public class Product {
         sb.append("id=").append(id);
         sb.append(", name='").append(name).append('\'');
         sb.append(", pret='").append(pret).append('\'');
-        sb.append(", dataExpirarii=").append(dataExpirarii);
-        sb.append(", producator='").append(producator).append('\'');
         sb.append(", stock=").append(stock);
         sb.append('}');
         return sb.toString();

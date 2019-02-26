@@ -65,7 +65,7 @@ public class MagazinService {
                 productDTO.setName(product.getName());
                 productDTO.setPret(product.getPret());
 
-                magazinDTO.getFirstlements().add(productDTO);
+                magazinDTO.getFirstelements().add(productDTO);
                 nrOfProd++;
             }
 

@@ -78,7 +78,7 @@ public class MagazinService {
         MagazinDTO magazinDTO = new MagazinDTO();
         magazinDTO.setNume(magazin.getNume());
         magazinDTO.setId(magazin.getId());
-        magazin.setProducts(new ArrayList<>());
+        magazinDTO.setProducts(new ArrayList<>());
         for (Product product : magazin.getProducts()) {
             ProductDTO p = new ProductDTO();
             p.setName(product.getName());

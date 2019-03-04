@@ -3,6 +3,7 @@ package org.fasttrackit.magazin.service;
 import org.fasttrackit.magazin.domain.Product;
 import org.fasttrackit.magazin.domain.Magazin;
 import org.fasttrackit.magazin.dto.ProductDTO;
+import org.fasttrackit.magazin.dto.MagazinDTO;
 import org.fasttrackit.magazin.persistence.MagazinRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,7 +21,7 @@ public class MagazinService {
     private MagazinRepository magazinRepository;
 
     @Transactional
-    public void saveMagazin(org.fasttrackit.magazin.dto.MagazinDTO magazin) {
+    public void saveMagazin(MagazinDTO magazin) {
         if (magazin.getNume() == null) {
             throw new IllegalArgumentException("Nume can not be null");
         }
@@ -28,28 +29,22 @@ public class MagazinService {
             throw new IllegalArgumentException("Adresa can not be null");
         }
 
-       Magazin maga = convert(magazin);
-        try {
-            //open transaction
-            magazinRepository.save(maga);
-//            close
-        } catch (Exception e) {
-            System.out.println("Error when saving magazin " + e);
-        }
+        Magazin maga = convert(magazin);
+        magazinRepository.save(maga);
     }
 
     @Transactional
-    public List<org.fasttrackit.magazin.dto.MagazinDTO> getMagazin() {
+    public List<MagazinDTO> getMagazin() {
         Iterator<Magazin> iterator =
                 magazinRepository.findAll().iterator();
 
 
-        List<org.fasttrackit.magazin.dto.MagazinDTO> list = new ArrayList<>();
+        List<MagazinDTO> list = new ArrayList<>();
 
         while (iterator.hasNext()) {
             Magazin magazin = iterator.next();
 
-            org.fasttrackit.magazin.dto.MagazinDTO magazinDTO = new org.fasttrackit.magazin.dto.MagazinDTO();
+            MagazinDTO magazinDTO = new MagazinDTO();
             magazinDTO.setNume(magazin.getNume());
             magazinDTO.setAdresa(magazin.getAdresa());
             magazinDTO.setId(magazin.getId());
@@ -78,39 +73,56 @@ public class MagazinService {
 
     }
 
-    private org.fasttrackit.magazin.dto.MagazinDTO convertToDTO(Magazin magazin) {
+    private MagazinDTO convertToDTO(Magazin magazin) {
 
-        org.fasttrackit.magazin.dto.MagazinDTO magazinDTO = new org.fasttrackit.magazin.dto.MagazinDTO();
+        MagazinDTO magazinDTO = new MagazinDTO();
         magazinDTO.setNume(magazin.getNume());
         magazinDTO.setId(magazin.getId());
+        magazin.setProducts(new ArrayList<>());
+        for (Product product : magazin.getProducts()) {
+            ProductDTO p = new ProductDTO();
+            p.setName(product.getName());
+            p.setPret(product.getPret());
+            p.setUlrImage(product.getUlrImage());
+            magazinDTO.getProducts().add(p);
+        }
+
         return magazinDTO;
     }
 
-    private Magazin convert(org.fasttrackit.magazin.dto.MagazinDTO magazinDTO) {
+    private Magazin convert(MagazinDTO magazinDTO) {
 
         Magazin magazin = new Magazin();
         magazin.setNume(magazinDTO.getNume());
         magazin.setAdresa(magazinDTO.getAdresa());
+        magazin.setProducts(new ArrayList<>());
+        for (ProductDTO productDTO : magazinDTO.getProducts()) {
+            Product p = new Product();
+            p.setName(productDTO.getName());
+            p.setPret(productDTO.getPret());
+            p.setUlrImage(productDTO.getUlrImage());
+            magazin.getProducts().add(p);
+        }
         return magazin;
     }
 
-    public org.fasttrackit.magazin.dto.MagazinDTO getMagazinById(long id) {
+    public MagazinDTO getMagazinById(long id) {
 
         Magazin magazin = magazinRepository.findOne(id);
-        if(magazin == null) {
+        if (magazin == null) {
             throw new IllegalArgumentException("The id is not valid.");
         }
         return convertToDTO(magazin);
     }
 
-    public org.fasttrackit.magazin.dto.MagazinDTO updateMagazin(long id, org.fasttrackit.magazin.dto.MagazinDTO dto) {
+    public MagazinDTO updateMagazin(long id, MagazinDTO dto) {
 
-       Magazin magazin = magazinRepository.findOne(id);
-       magazin.setNume(dto.getNume());
-       magazin.setAdresa(dto.getAdresa());
+        Magazin magazin = magazinRepository.findOne(id);
+        magazin.setNume(dto.getNume());
+        magazin.setAdresa(dto.getAdresa());
 
-       Magazin savedObject = magazinRepository.save(magazin);
+        Magazin savedObject = magazinRepository.save(magazin);
 
-       return convertToDTO(savedObject);
+        return convertToDTO(savedObject);
     }
 }

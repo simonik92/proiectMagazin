@@ -20,7 +20,15 @@ public class Product {
     private String name;
     private String pret;
     private int stock;
+    private String ulrImage;
 
+    public String getUlrImage() {
+        return ulrImage;
+    }
+
+    public void setUlrImage(String ulrImage) {
+        this.ulrImage = ulrImage;
+    }
 
     public long getId() {
         return id;

@@ -5,7 +5,15 @@ public class ProductDTO {
 
     private String name;
     private String pret;
+    private String ulrImage;
 
+    public String getUlrImage() {
+        return ulrImage;
+    }
+
+    public void setUlrImage(String ulrImage) {
+        this.ulrImage = ulrImage;
+    }
 
     public long getId() {
         return id;

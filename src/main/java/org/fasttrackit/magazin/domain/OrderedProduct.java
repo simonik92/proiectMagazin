@@ -1,19 +1,23 @@
 package org.fasttrackit.magazin.domain;
 
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
 
 @Entity
 public class OrderedProduct {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(generator = "product_generator")
+    @SequenceGenerator(
+            name = "product_generator",
+            sequenceName = "product_sequence",
+            initialValue = 1
+    )
     private long id;
 
-    @OneToOne
+
+    @ManyToOne
+    @JoinColumn(name = "productId")
     private Product product;
     private int quantity;
 
@@ -31,5 +35,13 @@ public class OrderedProduct {
 
     public void setQuantity(int quantity) {
         this.quantity = quantity;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
     }
 }
